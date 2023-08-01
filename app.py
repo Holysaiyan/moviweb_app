@@ -68,5 +68,10 @@ def delete_movie(user_id, movie_id):
         return 'METHOD NOT ALLOWED', 405
 
 
+@app.route('/users/user_id/update_movie/movie_id', methods=['POST', 'GET'])
+def update_movie(user_id, movie_id):
+    pass
+
+
 if __name__ == '__main__':
     app.run(debug=True)
