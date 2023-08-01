@@ -1,6 +1,6 @@
 import json
-from moviweb_app.DataManager.data_manager_interface import DataManagerInterface
-from moviweb_app.DataManager.movie_api import search_movie
+from DataManager.data_manager_interface import DataManagerInterface
+from DataManager.movie_api import search_movie
 
 
 class JSONDataManager(DataManagerInterface):
@@ -23,7 +23,7 @@ class JSONDataManager(DataManagerInterface):
     def get_data(self):
         return self.data
 
-    def write_data(self, new_data):
+    def save_data(self, new_data):
         with open(self.filename, 'w', encoding='utf-8') as file:
             json.dump(new_data, file)
         return 'Successfully written the new data'
@@ -44,7 +44,7 @@ class JSONDataManager(DataManagerInterface):
         return movie_id
 
     def get_user_movies(self, user_id) -> [list, str]:
-        for item in self.data:
+        for item in self.get_data():
             if item['id'] == user_id:
                 if not item['movies']:
                     return []
@@ -69,8 +69,8 @@ class JSONDataManager(DataManagerInterface):
         if get_user_id is not None:
 
             # check if movie already exists in user account
-            check_movie_list = [movie_info['name'] for item in data if item['id'] == user_id for movie_info in item[
-                'movies']]
+            check_movie_list = [movie_info['name'] for item in data
+                                if item['id'] == user_id for movie_info in item['movies']]
             if movie_data['Title'] in check_movie_list:
                 return 'Movie already exists'
 
@@ -82,13 +82,44 @@ class JSONDataManager(DataManagerInterface):
                          'rating': float(movie_data["imdbRating"])}
 
             [item['movies'].append(new_movie) for item in data if item['id'] == user_id]
-            self.write_data(data)
-            return 'Movie Successfully Added'
-        else:
-            return 'User does not exist, Create account first'
+            self.save_data(data)
+
+    def delete_movie(self, user_id, movie_id):
+        """
+        This function deletes the movie targeted through movie_id in the user_id.
+        It then modifies the movie_id in the user_id in the ascending order, filling
+        the gap.
+        """
+        data = self.get_data()
+
+        movie_info = [movie for item in data if item['id'] == user_id
+                      for movie in item['movies'] if movie['id'] == movie_id]
+
+        movie_lst = [movie for item in data if item['id'] == user_id
+                     for movie in item['movies']]
+
+        if movie_info:
+            movie_lst.remove(movie_info[0])
+
+            # Update the data with the modified movie_lst
+            for item in data:
+                if item['id'] == user_id:
+                    item['movies'] = movie_lst
+
+            # fill the movies id gap
+            for user_info in data:
+                if user_info['id'] == user_id:
+                    for index, movie_info in enumerate(user_info['movies'], start=1):
+                        movie_info['id'] = index
+
+        self.save_data(data)
+
+    def update_movie(self, user_id, movie_id):
+        pass
 
 
-#a = JSONDataManager('../movie.json')
+# a = JSONDataManager('../movie.json')
 # print(a.find_user_id(8))
-#print(a.add_movie('Ghost Rider', 6))
+# print(a.add_movie('Ghost Rider', 6))
 # print(a.generate_movie_id(1))
+# print(a.delete_movie(1, 1))

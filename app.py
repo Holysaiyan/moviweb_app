@@ -1,5 +1,3 @@
-import json
-
 from flask import Flask, render_template, request, redirect, url_for
 from DataManager.json_data_manager import JSONDataManager
 
@@ -49,7 +47,7 @@ def user_movies(user_id):
     return render_template('user_movies.html', user_id=user_id, user=data)
 
 
-@app.route('/users/<user_id>/add_movie', methods=['POST', 'GET'])
+@app.route('/users/<int:user_id>/add_movie', methods=['POST', 'GET'])
 def add_movie(user_id):
     if request.method == 'POST':
         movie_name = request.form.get('movie_name')
@@ -58,10 +56,17 @@ def add_movie(user_id):
     return render_template('add_movie.html', user_id=user_id)
 
 
-@app.route('/users/<user_id>/delete_movie/<movie_id>', methods=['POST', 'GET'])
+@app.route('/users/<int:user_id>/delete_movie/<int:movie_id>', methods=['DELETE', 'GET'])
 def delete_movie(user_id, movie_id):
-    if request.method == 'POST':
-        pass
+    if request.method == 'GET':
+        data_manager.delete_movie(user_id=user_id, movie_id=movie_id)
+        return redirect(url_for('user_movies', user_id=user_id))
+    elif request.method == 'DELETE':
+        data_manager.delete_movie(user_id=user_id, movie_id=movie_id)
+        return redirect(url_for('user_movies', user_id=user_id))
+    else:
+        return 'METHOD NOT ALLOWED', 405
+
 
 if __name__ == '__main__':
     app.run(debug=True)
