@@ -3,5 +3,6 @@
 DataManager/.env
 __pycache__/
 DataManager/__pycache__/
+.idea
 
 
