@@ -1,0 +1,7 @@
+# created by virtualenv automatically
+*
+DataManager/.env
+__pycache__/
+DataManager/__pycache__/
+
+
