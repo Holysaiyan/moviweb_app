@@ -10,10 +10,99 @@
   margin: 25%;
 }
 
-body {
-  background-color: #4682a9;
-}
-
 a {
   background-color: blue;
+}
+
+.nav-div {
+  position: fixed;
+  width: 100%;
+}
+
+.nav {
+  background-color: #f4d160;
+}
+
+.movie-bar {
+  position: relative;
+  margin: auto;
+  border-radius: 25%;
+}
+
+.user-container {
+  background-color: #fbeeac;
+  opacity: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Distribute items evenly in the row */
+  padding: 20px;
+}
+
+.card {
+  flex: 0 0 calc(33.33% - 20px); /* Three items in a row */
+  margin-bottom: 20px;
+  background-color: lightgray;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #91c8e4;
+}
+
+#carouselExampleAutoplaying {
+  height: 75vh;
+  width: 50vw;
+  display: flex;
+  position: relative;
+  margin: 0 auto;
+}
+
+.carousel-item {
+  max-width: 100%;
+  height: auto;
+}
+
+.inner-box-container {
+  background-color: #f6f4eb;
+  width: 75vw;
+  height: 100vh;
+  position: relative;
+  margin: 0 auto;
+}
+
+.movie-box-container {
+  background-color: #f6f4eb;
+  width: 85vw;
+  height: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+
+/* Styling for the form container */
+.form-box-container {
+  background-color: #f6f4eb; /* Background color */
+  width: 40rem; /* Full width of the container */
+  height: 100vh; /* Full viewport height */
+  display: flex; /* Display as flex container */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  position: relative;
+  margin-left: 20rem;
+}
+
+body {
+  background-image: url(images/wp1945897.jpg);
+}
+
+p,
+h1 {
+  font-family: "Lobster", cursive;
 }

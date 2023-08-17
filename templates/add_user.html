@@ -4,21 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <!-- Link to your custom styles.css file -->
     <link rel="stylesheet" href={{url_for('static',filename='styles.css')}}>
+    <!-- Link to Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
   </head>
   <body>
-    <form action="/add_user" method="post" class="add_form">
-      <div class="sign_up_form">
-        <label for="name"></label>
-        <input
-          type="text"
-          name="new_user"
-          placeholder="Enter name here"
-          id="name"
-          required
-        />
+    <!-- Navigation bar -->
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a
+          class="nav-link active"
+          aria-current="page"
+          href="{{ url_for('home') }}"
+          >Home</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('about_us') }}">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('get_users') }}">Users</a>
+      </li>
+    </ul>
+
+    <!-- Form container -->
+    <div class="form-box-container">
+      <div>
+        <!-- User addition form -->
+        <form action="/add_user" method="post" class="add_form">
+          <label for="name">Enter name:</label>
+          <input
+            type="text"
+            name="new_user"
+            placeholder="Enter name here"
+            id="name"
+            required
+          />
+
+          <button type="submit" class="sign_up_button">Submit</button>
+        </form>
       </div>
-      <button type="submit" class="sign_up_button">Submit</button>
-    </form>
+    </div>
   </body>
 </html>

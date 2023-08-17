@@ -5,13 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Movie</title>
     <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
   </head>
   <body>
-    <h2>Add Movie</h2>
-    <form action="{{ url_for('add_movie', user_id=user_id) }}" method="post">
-      <label for="movie_name">Movie Name:</label>
-      <input type="text" id="movie_name" name="movie_name" required />
-      <button type="submit">Add</button>
-    </form>
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a
+          class="nav-link active"
+          aria-current="page"
+          href="{{ url_for('home') }}  "
+          >Home</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('about_us') }}">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('get_users') }}">Users</a>
+      </li>
+    </ul>
+    <div class="form-box-container">
+      <div>
+        <form
+          action="{{ url_for('add_movie', user_id=user_id) }}"
+          method="post"
+        >
+          <label for="movie_name">Movie Name:</label>
+          <input
+            type="text"
+            id="movie_name"
+            name="movie_name"
+            required
+            placeholder="Enter movie name here"
+          />
+          <button type="submit">Add</button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>

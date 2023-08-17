@@ -4,13 +4,66 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href={{url_for('static',filename='styles.css')}}>
+    <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
   </head>
   <body>
-    <ul>
-      {% for user_info in user %} {% if user_info['id'] == user_id %} {% for
-      movie in user_info['movies'] %}
-      <li>{{ movie }}</li>
-      {% endfor %} {% endif %} {% endfor %}
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a
+          class="nav-link active"
+          aria-current="page"
+          href="{{ url_for('home') }}  "
+          >Home</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('about_us') }}">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('get_users') }}">Users</a>
+      </li>
     </ul>
+    <!--Add flexbox here-->
+    <div class="movie-box-container">
+      <div class="container">
+        {% for user_info in user %} {% if user_info['id'] == user_id %} {% for
+        movie in user_info['movies'] %}
+        <div class="card" style="width: 18rem">
+          <img src="{{movie['poster']}}" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">{{ movie['name'] }}</h5>
+            <p class="card-text">{{movie['plot']}}</p>
+            <a
+              href="{{ url_for('update_movie', user_id=user_id, movie_id=movie['id']) }}"
+              class="btn btn-primary"
+              >Update</a
+            >
+            <a
+              href="{{ url_for('delete_movie', user_id=user_id, movie_id=movie['id']) }}"
+              class="btn btn-primary"
+              >Delete</a
+            >
+          </div>
+        </div>
+
+        {% endfor %} {% endif %} {% endfor %}
+        <div class="card add_movie_btn" style="width: 8rem">
+          <a
+            href="{{ url_for('add_movie', user_id=user_id, movie_id=movie_id) }}"
+            ><img
+              src="/static/images/logos/movie_track_add.png"
+              class="card-img-top"
+              alt="..."
+          /></a>
+          <div class="card-body">
+            <h5 class="card-title">Add Movie</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- End Flex box here -->
   </body>
 </html>
