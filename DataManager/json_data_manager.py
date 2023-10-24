@@ -11,8 +11,8 @@ Classes:
 
 """
 import json
-from DataManager.data_manager_interface import DataManagerInterface
-from DataManager.movie_api import search_movie
+from .data_manager_interface import DataManagerInterface
+from .movie_api import search_movie
 
 
 class JSONDataManager(DataManagerInterface):
@@ -62,7 +62,7 @@ class JSONDataManager(DataManagerInterface):
             dict: The data stored in the JSON file.
         """
         try:
-            with open(self.filename) as file:
+            with open(self.filename, "r", encoding="UTF-8") as file:
                 data = json.load(file)
             return data
         except FileNotFoundError:

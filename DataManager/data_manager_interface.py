@@ -1,24 +1,50 @@
+"""
+Data Manager Interface (Abstract Base Class)
+
+This class defines the interface for managing user and movie data.
+
+Methods:
+    get_all_users(): Get a list of all usernames.
+    get_user_movies(user_id): Get the movies associated with a specific user.
+    add_user(name): Add a new user to the database.
+    get_data(): Get the entire data stored in the data manager.
+    save_data(): Save data to the data manager.
+    generate_user_id(): Generate a new user ID.
+    find_user_id(): Find a user's ID.
+    generate_movie_id(): Generate a new movie ID.
+    add_movie(movie_name, user_id): Add a new movie to a user's collection.
+    delete_movie(user_id, movie_id): Delete a movie from a user's collection.
+    update_movie_info(user_id, movie_id, updated_movie_info): Update movie information.
+ """
 from abc import ABC, abstractmethod
 
 
 class DataManagerInterface(ABC):
     """
-    Data Manager Interface (Abstract Base Class)
+    Abstract Base Class for Data Management Interface
 
-    This class defines the interface for managing user and movie data.
+    This class defines an abstract interface for managing user and movie data.
+    Subclasses are required to provide concrete implementations for these methods.
+
+    Attributes:
+        None
 
     Methods:
         get_all_users(): Get a list of all usernames.
         get_user_movies(user_id): Get the movies associated with a specific user.
         add_user(name): Add a new user to the database.
         get_data(): Get the entire data stored in the data manager.
-        save_data(): Save data to the data manager.
+        save_data(new_data): Save data to the data manager.
         generate_user_id(): Generate a new user ID.
-        find_user_id(): Find a user's ID.
-        generate_movie_id(): Generate a new movie ID.
+        find_user_id(user_id): Find a user's ID.
+        generate_movie_id(user_id): Generate a new movie ID.
         add_movie(movie_name, user_id): Add a new movie to a user's collection.
         delete_movie(user_id, movie_id): Delete a movie from a user's collection.
         update_movie_info(user_id, movie_id, updated_movie_info): Update movie information.
+
+    Note:
+        Subclasses must provide concrete implementations for all the abstract methods
+        defined in this class in order to create functional data management systems.
     """
 
     @abstractmethod
@@ -29,7 +55,6 @@ class DataManagerInterface(ABC):
         Returns:
             list: A list of usernames.
         """
-        pass
 
     @abstractmethod
     def get_user_movies(self, user_id):
@@ -42,7 +67,6 @@ class DataManagerInterface(ABC):
         Returns:
             list: A list of movies associated with the user.
         """
-        pass
 
     @abstractmethod
     def add_user(self, name):
@@ -55,7 +79,6 @@ class DataManagerInterface(ABC):
         Returns:
             str or None: A success message or an error message.
         """
-        pass
 
     @abstractmethod
     def get_data(self):
@@ -65,17 +88,15 @@ class DataManagerInterface(ABC):
         Returns:
             dict: The data stored in the data manager.
         """
-        pass
 
     @abstractmethod
-    def save_data(self):
+    def save_data(self, new_data):
         """
         Save data to the data manager.
 
         Returns:
             str: A success message indicating the data has been saved.
         """
-        pass
 
     @abstractmethod
     def generate_user_id(self):
@@ -85,27 +106,24 @@ class DataManagerInterface(ABC):
         Returns:
             int: The newly generated user ID.
         """
-        pass
 
     @abstractmethod
-    def find_user_id(self):
+    def find_user_id(self, user_id):
         """
         Find a user's ID.
 
         Returns:
             list or None: A list of found user IDs or None if not found.
         """
-        pass
 
     @abstractmethod
-    def generate_movie_id(self):
+    def generate_movie_id(self, user_id):
         """
         Generate a new unique movie ID.
 
         Returns:
             int: The newly generated movie ID.
         """
-        pass
 
     @abstractmethod
     def add_movie(self, movie_name, user_id):
@@ -119,7 +137,6 @@ class DataManagerInterface(ABC):
         Returns:
             str or None: A success message or an error message.
         """
-        pass
 
     @abstractmethod
     def delete_movie(self, user_id, movie_id):
@@ -133,7 +150,6 @@ class DataManagerInterface(ABC):
         Returns:
             str or None: A success message or an error message.
         """
-        pass
 
     @abstractmethod
     def update_movie_info(self, user_id, movie_id, updated_movie_info):
@@ -148,4 +164,3 @@ class DataManagerInterface(ABC):
         Returns:
             str or None: A success message or an error message.
         """
-        pass

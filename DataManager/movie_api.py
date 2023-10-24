@@ -66,7 +66,3 @@ def search_movie(name):
     movie = f"http://www.omdbapi.com/?apikey={api_key}&t={name}"
     movie_data = requests.get(movie)
     return movie_data.json()
-
-
-
-

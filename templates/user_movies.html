@@ -19,36 +19,48 @@
         >
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('show_movies') }}">Movies</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="{{ url_for('about_us') }}">About Us</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ url_for('get_users') }}">Users</a>
       </li>
     </ul>
+
     <!--Add flexbox here-->
     <div class="movie-box-container">
+      <div class="uname">
+        <h3>{{name.name }} Movies</h3>
+      </div>
       <div class="container">
-        {% for user_info in user %} {% if user_info['id'] == user_id %} {% for
-        movie in user_info['movies'] %}
+        {% for user_info in user %} {% if user_info['user_id'] == user_id %}
         <div class="card" style="width: 18rem">
-          <img src="{{movie['poster']}}" class="card-img-top" alt="..." />
+          <img
+            src="{{user_info['movie_image']}}"
+            class="card-img-top"
+            alt="..."
+          />
           <div class="card-body">
-            <h5 class="card-title">{{ movie['name'] }}</h5>
-            <p class="card-text">{{movie['plot']}}</p>
+            <h5 class="card-title">{{ user_info['movie_title'] }}</h5>
+            <p class="card-text">Director: {{user_info['director_name']}}</p>
+            <p class="card-text">release year: {{user_info['movie_year']}}</p>
+            <p class="card-text">user rating: {{user_info['movie_rating']}}</p>
             <a
-              href="{{ url_for('update_movie', user_id=user_id, movie_id=movie['id']) }}"
+              href="{{ url_for('update_movie', user_id=user_id, movie_id=user_info['movie_id']) }}"
               class="btn btn-primary"
               >Update</a
             >
             <a
-              href="{{ url_for('delete_movie', user_id=user_id, movie_id=movie['id']) }}"
+              href="{{ url_for('delete_movie', user_id=user_id, movie_id=user_info['movie_id']) }}"
               class="btn btn-primary"
               >Delete</a
             >
           </div>
         </div>
 
-        {% endfor %} {% endif %} {% endfor %}
+        {% endif %} {% endfor %}
         <div class="card add_movie_btn" style="width: 8rem">
           <a
             href="{{ url_for('add_movie', user_id=user_id, movie_id=movie_id) }}"
