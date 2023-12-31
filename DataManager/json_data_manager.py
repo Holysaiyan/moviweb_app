@@ -12,7 +12,7 @@ Classes:
 """
 import json
 from .data_manager_interface import DataManagerInterface
-from .movie_api import search_movie
+from .omdb_movie_api import search_movie
 
 
 class JSONDataManager(DataManagerInterface):

@@ -27,13 +27,16 @@ Error Handlers:
 """
 from flask import Flask, render_template, request, redirect, url_for
 from DataManager.sql_data_manager import SQLiteDataManager
-
-from api_manager.api import api
-
+from api_manager.users_api import users_api
+from api_manager.movies_api import movies_api
 
 data_manager = SQLiteDataManager('DataManager/movie.db')
 
 app = Flask(__name__)
+
+app.register_blueprint(users_api, url_prefix='/api')
+app.register_blueprint(movies_api, url_prefix='/api')
+
 
 @app.route('/')
 def home():

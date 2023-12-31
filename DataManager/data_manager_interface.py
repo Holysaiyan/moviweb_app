@@ -26,8 +26,7 @@ class DataManagerInterface(ABC):
     This class defines an abstract interface for managing user and movie data.
     Subclasses are required to provide concrete implementations for these methods.
 
-    Attributes:
-        None
+
 
     Methods:
         get_all_users(): Get a list of all usernames.
@@ -69,7 +68,7 @@ class DataManagerInterface(ABC):
         """
 
     @abstractmethod
-    def add_user(self, name):
+    def add_user(self, name, email):
         """
         Add a new user to the database.
 
@@ -78,16 +77,10 @@ class DataManagerInterface(ABC):
 
         Returns:
             str or None: A success message or an error message.
+            :param name:
+            :param email:
         """
 
-    @abstractmethod
-    def get_data(self):
-        """
-        Get the entire data stored in the data manager.
-
-        Returns:
-            dict: The data stored in the data manager.
-        """
 
     @abstractmethod
     def save_data(self, new_data):
@@ -98,14 +91,6 @@ class DataManagerInterface(ABC):
             str: A success message indicating the data has been saved.
         """
 
-    @abstractmethod
-    def generate_user_id(self):
-        """
-        Generate a new unique user ID.
-
-        Returns:
-            int: The newly generated user ID.
-        """
 
     @abstractmethod
     def find_user_id(self, user_id):
@@ -116,14 +101,6 @@ class DataManagerInterface(ABC):
             list or None: A list of found user IDs or None if not found.
         """
 
-    @abstractmethod
-    def generate_movie_id(self, user_id):
-        """
-        Generate a new unique movie ID.
-
-        Returns:
-            int: The newly generated movie ID.
-        """
 
     @abstractmethod
     def add_movie(self, movie_name, user_id):
